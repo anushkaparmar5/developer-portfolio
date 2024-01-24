@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect, HashRouter } from 'react-router-dom';
 import { ThemeContext } from './contexts/ThemeContext';
 import { Main } from './pages'
 import { BackToTop } from './components'
@@ -16,14 +16,16 @@ function App() {
 
   return (
     <div className="app">
-      <Router basename="/developer-portfolio">
+      {/* <Router basename="/developer-portfolio"> */}
+      <HashRouter basename='/developer-portfolio'>
         <ScrollToTop />
         <Switch>
           <Route path="/" exact component={Main} />
           {/* <Route path="/projects" exact component={ProjectPage} /> */}
           <Redirect to="/" />
         </Switch>
-      </Router>
+        {/* </Router> */}
+      </HashRouter>
       <BackToTop />
     </div>
   );
