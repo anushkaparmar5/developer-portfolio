@@ -1,4 +1,5 @@
-const BASE_URL = 'https://anushkaparmar5.github.io/developer-portfolio/';
+// const BASE_URL = 'https://anushkaparmar5.github.io/developer-portfolio/';
+const BASE_URL = '/';
 const URLS = {
     Home: `${BASE_URL}`,
     About: `${BASE_URL}#about`,
