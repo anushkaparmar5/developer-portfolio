@@ -14,6 +14,7 @@ import './Navbar.css';
 import { headerData } from '../../data/headerData';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import { useHistory } from 'react-router-dom';
+import URLS from '../../routing/index';
 
 function Navbar() {
     const { theme, setHandleDrawer } = useContext(ThemeContext);
@@ -135,7 +136,7 @@ function Navbar() {
     };
 
     const handleLogoClick = () => {
-        history.push("/");
+        history.push(URLS.Home);
     };
 
     return (
@@ -188,7 +189,7 @@ function Navbar() {
                     <div className='navLink--container'>
                         <Fade left>
                             <NavLink
-                                to='/'
+                                to={URLS.Home}
                                 smooth={true}
                                 spy='true'
                                 duration={2000}
@@ -206,7 +207,7 @@ function Navbar() {
 
                         <Fade left>
                             <NavLink
-                                to='/#about'
+                                to={URLS.About}
                                 smooth={true}
                                 spy='true'
                                 duration={2000}
@@ -222,7 +223,7 @@ function Navbar() {
 
                         <Fade left>
                             <NavLink
-                                to='/#education'
+                                to={URLS.Education}
                                 smooth={true}
                                 spy='true'
                                 duration={2000}
@@ -240,7 +241,7 @@ function Navbar() {
 
                         <Fade left>
                             <NavLink
-                                to='/#skills'
+                                to={URLS.Skills}
                                 smooth={true}
                                 spy='true'
                                 duration={2000}
@@ -258,7 +259,7 @@ function Navbar() {
 
                         <Fade left>
                             <NavLink
-                                to='/#services'
+                                to={URLS.Services}
                                 smooth={true}
                                 spy='true'
                                 duration={2000}
@@ -276,7 +277,7 @@ function Navbar() {
 
                         <Fade left>
                             <NavLink
-                                to='/#projects'
+                                to={URLS.Projects}
                                 smooth={true}
                                 spy='true'
                                 duration={2000}
@@ -294,7 +295,7 @@ function Navbar() {
 
                         <Fade left>
                             <NavLink
-                                to='/#contacts'
+                                to={URLS.Contacts}
                                 smooth={true}
                                 spy='true'
                                 duration={2000}

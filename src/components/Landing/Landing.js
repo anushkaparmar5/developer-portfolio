@@ -13,6 +13,7 @@ import {
     FaGithub,
     FaWhatsapp,
 } from 'react-icons/fa';
+import URLS from '../../routing';
 
 function Landing() {
     const { theme, drawerOpen } = useContext(ThemeContext);
@@ -149,7 +150,7 @@ function Landing() {
                                 </a>
                             )}
                             <NavLink
-                                to='/#contacts'
+                                to={URLS.Contacts}
                                 smooth={true}
                                 spy='true'
                                 duration={2000}
