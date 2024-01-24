@@ -22,7 +22,7 @@ export const achievementData = {
             image: HTMLCertificate,
         },
         {
-            id: 3,
+            id: 4,
             title: 'CSS Course',
             details: 'CSS Course from Solo Learn',
             date: 'Apr 13, 2021',
