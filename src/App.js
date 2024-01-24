@@ -6,6 +6,7 @@ import { BackToTop } from './components'
 import ScrollToTop from './utils/ScrollToTop'
 
 import './App.css'
+import URLS from './routing';
 
 function App() {
 
@@ -20,9 +21,9 @@ function App() {
       <HashRouter basename='/developer-portfolio'>
         <ScrollToTop />
         <Switch>
-          <Route path="/" exact component={Main} />
+          <Route path={URLS.Home} exact component={Main} />
           {/* <Route path="/projects" exact component={ProjectPage} /> */}
-          <Redirect to="/" />
+          <Redirect path={URLS.Home} />
         </Switch>
         {/* </Router> */}
       </HashRouter>
