@@ -9,11 +9,11 @@ export const experienceData = [
     },
     {
         id: 2,
-        company: 'Conceptserve Technologies',
-        jobtitle: 'Jr. ReactJs Developer',
-        startYear: '2023',
-        endYear: '2024',
-        inWord: "2th Month"
+        company: 'Techseria Pvt Ltd',
+        jobtitle: 'ReactJs Developer',
+        startYear: '2024',
+        endYear: 'Present',
+        inWord: "2 years"
     },
 
 ]

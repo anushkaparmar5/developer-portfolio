@@ -236,6 +236,8 @@ export const skillsImage = (skill) => {
             return Redux;
         case 'rest api':
             return RestAPI;
+        case 'julia':
+            return julia;
         default:
             break;
     }
