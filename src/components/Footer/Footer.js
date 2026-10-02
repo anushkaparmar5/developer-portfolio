@@ -1,32 +1,25 @@
-import React, { useContext } from 'react'
-import './Footer.css'
-import { ThemeContext } from '../../contexts/ThemeContext'
-import { headerData } from '../../data/headerData'
+import React from 'react';
+import './Footer.css';
+import { headerData } from '../../data/headerData';
+import { FiHeart } from 'react-icons/fi';
 
 function Footer() {
-
-    const shortname = (name) => {
-        if(name.length > 10) {
-            return name.split(" ")[0]
-        } else {
-            return name
-        }
-    }
-
-    const { theme }  = useContext(ThemeContext)
-
     return (
-        <div className="footer" style={{backgroundColor: theme.secondary}}>
-            <p style={{color: theme.tertiary}}>
-                Made with  
-                <span style={{color: theme.primary, margin: '0 0.5rem -1rem 0.5rem'}}>
-                    ❤
-                </span>
-                 by {shortname(headerData.name)}
-            </p>
-        </div>
-    )
+        <footer className='modern-footer'>
+            <div className='footer-container'>
+                <div className='footer-brand'>
+                    <span className='footer-logo'>BP</span>
+                    <span className='footer-dot'>.</span>
+                </div>
+                <p className='footer-text'>
+                    Designed & Engineered with <FiHeart className='footer-heart' /> by <strong>{headerData.name}</strong>
+                </p>
+                <p className='footer-copyright'>
+                    © {new Date().getFullYear()} All Rights Reserved. Built with React & modern CSS.
+                </p>
+            </div>
+        </footer>
+    );
 }
 
-export default Footer
-
+export default Footer;

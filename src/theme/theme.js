@@ -8,6 +8,84 @@ import {
 } from './images'
 
 
+/* ==============================
+   MODERN PREMIUM THEMES
+   Inspired by srijanbaniyal.com & pintusingh28.dev
+   ============================== */
+
+// ─── Modern Dark (Primary Theme) ─────────────────────────
+export const modernDark = {
+    type: 'dark',
+    primary: '#6C63FF',
+    primary400: '#8B83FF',
+    primary600: '#5046E5',
+    primary80: '#6C63FFcc',
+    primary50: '#6C63FF80',
+    primary30: '#6C63FF4d',
+    secondary: '#0F0F1A',
+    secondary70: '#0F0F1Ab3',
+    secondary50: '#0F0F1A80',
+    tertiary: '#F0F0F5',
+    tertiary80: '#F0F0F5cc',
+    tertiary70: '#F0F0F5b3',
+    tertiary50: '#F0F0F580',
+    aboutimg1: blueThemeboy,
+    aboutimg2: blueThemegirl,
+    eduimg: eduBlue,
+    expimg: expBlue,
+    contactsimg: contactsBlue
+}
+
+// ─── Modern Light ──────────────────────────────────────
+export const modernLight = {
+    type: 'light',
+    primary: '#6C63FF',
+    primary400: '#8B83FF',
+    primary600: '#5046E5',
+    primary80: '#6C63FFcc',
+    primary50: '#6C63FF80',
+    primary30: '#6C63FF4d',
+    secondary: '#F5F5F6',
+    secondary70: '#F5F5F6b3',
+    secondary50: '#F5F5F680',
+    tertiary: '#1a1a1f',
+    tertiary80: '#1a1a1fcc',
+    tertiary70: '#1a1a1fb3',
+    tertiary50: '#1a1a1f80',
+    aboutimg1: blueThemeboy,
+    aboutimg2: blueThemegirl,
+    eduimg: eduBlue,
+    expimg: expBlue,
+    contactsimg: contactsBlue
+}
+
+// ─── Teal Accent Dark ───────────────────────────────────
+export const tealDark = {
+    type: 'dark',
+    primary: '#40D6BD',
+    primary400: '#5DDFCB',
+    primary600: '#2BC4AB',
+    primary80: '#40D6BDcc',
+    primary50: '#40D6BD80',
+    primary30: '#40D6BD4d',
+    secondary: '#0A0A14',
+    secondary70: '#0A0A14b3',
+    secondary50: '#0A0A1480',
+    tertiary: '#F0F0F5',
+    tertiary80: '#F0F0F5cc',
+    tertiary70: '#F0F0F5b3',
+    tertiary50: '#F0F0F580',
+    aboutimg1: greenThemeboy,
+    aboutimg2: greenThemegirl,
+    eduimg: eduGreen,
+    expimg: expGreen,
+    contactsimg: contactsGreen
+}
+
+/* ==============================
+   LEGACY THEMES (preserved)
+   ============================== */
+
 export const greenThemeLight = {
     type: 'light',
     primary: '#3fc337',
@@ -353,4 +431,4 @@ export const yellowThemeDark = {
     contactsimg: contactsYellow
 }
 
-export const allThemeData = [greenThemeLight, greenThemeDark, bwThemeLight, bwThemeDark, blueThemeLight, blueThemeDark, redThemeLight, redThemeDark, orangeThemeLight, orangeThemeDark, purpleThemeLight, purpleThemeDark, pinkThemeLight, pinkThemeDark, yellowThemeLight, yellowThemeDark];
+export const allThemeData = [modernDark, modernLight, tealDark, greenThemeLight, greenThemeDark, bwThemeLight, bwThemeDark, blueThemeLight, blueThemeDark, redThemeLight, redThemeDark, orangeThemeLight, orangeThemeDark, purpleThemeLight, purpleThemeDark, pinkThemeLight, pinkThemeDark, yellowThemeLight, yellowThemeDark];

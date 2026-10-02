@@ -1,19 +1,66 @@
-.footer {
-    font-family: 'var(--primaryFont)', sans-serif;
-    height: 60px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* ==============================
+   MODERN FOOTER
+   ============================== */
+
+.modern-footer {
+  background: #05070d;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 3rem 2rem 2.5rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
-.footer p {
-    font-weight: 500;
-    font-family: var(--primaryFont);
-    font-size: 18px;
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.footer p span {
-    font-size: 24px;
-    vertical-align: middle;
+.footer-brand {
+  font-family: var(--primaryFont);
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+}
+
+.footer-logo {
+  color: #f1f5f9;
+}
+
+.footer-dot {
+  color: #38bdf8;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.footer-text {
+  font-family: var(--primaryFont);
+  font-size: 0.95rem;
+  color: #94a3b8;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-text strong {
+  color: #f1f5f9;
+}
+
+.footer-heart {
+  color: #ef4444;
+  fill: #ef4444;
+  font-size: 0.9rem;
+  margin: 0 2px;
+}
+
+.footer-copyright {
+  font-family: var(--monoFont);
+  font-size: 0.8rem;
+  color: #64748b;
 }

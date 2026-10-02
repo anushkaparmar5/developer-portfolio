@@ -3,40 +3,31 @@ import CSSCertificate from "../assets/png/CSS.png";
 import JSCertificate from "../assets/png/JS.png";
 
 export const achievementData = {
-    bio: "The illiterate of the 21st century will not be those who cannot read and write, but those who cannot learn, unlearn, and relearn.",
+    bio: "Certifications and continuous learning in modern frontend & full-stack development.",
     achievements: [
-        // {
-        //     id: 1,
-        //     title: 'React + Redux Course',
-        //     details: 'A React course from Udemy',
-        //     date: 'Jan 28, 2021',
-        //     field: 'Coding',
-        //     image: HTMLCertificate,
-        // },
         {
-            id: 2,
-            title: 'HTML Course',
-            details: 'A HTML course from Udemy',
-            date: 'May 25, 2021',
-            field: 'Coding',
+            id: 1,
+            title: 'React + Redux (Advanced State Management)',
+            details: 'Mastered complex state management, custom hooks, async middleware, and performance optimization.',
+            date: '2023',
+            field: 'State Management',
             image: HTMLCertificate,
         },
         {
-            id: 4,
-            title: 'CSS Course',
-            details: 'CSS Course from Solo Learn',
-            date: 'Apr 13, 2021',
-            field: 'Coding',
-            image: CSSCertificate
+            id: 2,
+            title: 'JavaScript ES6+ Objects & Core Concepts',
+            details: 'Deep dive into asynchronous JavaScript, promises, event loop, closures, and ES6+ standards.',
+            date: '2022',
+            field: 'Core Languages',
+            image: JSCertificate
         },
         {
             id: 3,
-            title: 'JavaScript Course',
-            details: 'JavaScript Course from Solo Learn',
-            date: 'Feb 28, 2021',
-            field: 'Coding',
-            image: JSCertificate
+            title: 'Next.js Framework SSR & Modern Web Development',
+            details: 'Server-side rendering, static site generation, API routes, and full-stack React capabilities.',
+            date: '2023',
+            field: 'Modern Web Frameworks',
+            image: CSSCertificate
         }
-
     ]
 }

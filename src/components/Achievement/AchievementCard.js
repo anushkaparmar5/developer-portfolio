@@ -1,50 +1,41 @@
-import React, { useContext } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Fade from 'react-reveal/Fade';
+import React from 'react';
+import { FiAward, FiCalendar } from 'react-icons/fi';
+import './Achievement.css';
 
-import { ThemeContext } from '../../contexts/ThemeContext';
-
-import { AiOutlineFolder } from "react-icons/ai";
-
-import './Achievement.css'
-
-function AchievementCard({id, title, details, date, field, image}) {
-
-    const { theme } = useContext(ThemeContext);
-
-    const useStyles = makeStyles((t) => ({
-        achievementCard : {
-            backgroundColor:theme.primary30,
-            "&:hover": {
-                backgroundColor:theme.primary50,
-            },
-        },
-    }));
-
-    const classes = useStyles();
+function AchievementCard({ id, title, details, date, field, image }) {
     return (
-        <Fade bottom>
-           <div key={id} className={`achievement-card ${classes.achievementCard}`}>
-               <div className="achievecard-content">
-                    <div className="achievecard-details1">
-                        <h2 style={{color: theme.tertiary}}>{title}</h2>
-                        <p style={{color: theme.tertiary80}}>{details}</p>
-                    </div>
-                    <div className="achievecard-details2" style={{color: theme.primary}}>
-                        <h5>{date}</h5>
-                        <div className="achievecard-field">
-                            <AiOutlineFolder />
-                            <h5>{field}</h5>
-                        </div>   
-                    </div>
-                </div> 
-                <div className="achievecard-imgcontainer">
-                    <img src={image} alt="" />
+        <div className='cert-card'>
+            <div className='cert-card-top'>
+                <div className='cert-icon-badge'>
+                    <FiAward />
                 </div>
-           </div>
-        </Fade>
-        
-    )
+                <span className='cert-date'>
+                    <FiCalendar />
+                    <span>{date}</span>
+                </span>
+            </div>
+
+            <div className='cert-body'>
+                <h3 className='cert-title'>{title}</h3>
+                <p className='cert-desc'>{details}</p>
+                
+                <div className='cert-footer'>
+                    <span className='cert-field-badge'>{field}</span>
+                    {image && (
+                        <span className='cert-verified-tag'>
+                            ✓ Verified
+                        </span>
+                    )}
+                </div>
+            </div>
+
+            {image && (
+                <div className='cert-img-preview'>
+                    <img src={image} alt={title} className='cert-thumb' />
+                </div>
+            )}
+        </div>
+    );
 }
 
-export default AchievementCard
+export default AchievementCard;

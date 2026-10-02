@@ -1,18 +1,37 @@
-import React, { useContext } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, Redirect, HashRouter } from 'react-router-dom';
-import { ThemeContext } from './contexts/ThemeContext';
-import { Main } from './pages'
-import { BackToTop } from './components'
-import ScrollToTop from './utils/ScrollToTop'
-import './App.css'
+import { Main, ProjectPage } from './pages';
+import { BackToTop } from './components';
+import ScrollToTop from './utils/ScrollToTop';
+import './App.css';
 import URLS from './routing';
 
 function App() {
+  useEffect(() => {
+    const handleObserver = () => {
+      const observerCallback = (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      };
 
-  const { theme } = useContext(ThemeContext);
+      const observer = new IntersectionObserver(observerCallback, {
+        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.08
+      });
 
-  console.log("%cBANSI PARMAR PORTFOLIO", `color:${theme.primary}; font-size:50px`);
-  console.log("%chttps://github.com/anushkaparmar5", `color:${theme.tertiary}; font-size:20px`);
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      elements.forEach(el => observer.observe(el));
+    };
+
+    // Run on mount and periodically after load
+    handleObserver();
+    const timer = setTimeout(handleObserver, 300);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="app">
@@ -20,8 +39,8 @@ function App() {
         <ScrollToTop />
         <Switch>
           <Route path={URLS.Home} exact component={Main} />
-          {/* <Route path="/projects" exact component={ProjectPage} /> */}
-          <Redirect path={URLS.Home} />
+          <Route path="/projects" exact component={ProjectPage} />
+          <Redirect to={URLS.Home} />
         </Switch>
       </HashRouter>
       <BackToTop />

@@ -1,16 +1,16 @@
 export const educationData = [
     {
         id: 1,
-        institution: 'K S School of Business Management',
-        course: 'B. SC.( CA & IT)',
-        startYear: '2021',
-        endYear: '2018'
-    },
-    {
-        id: 2,
-        institution: 'K S School of Business Management',
-        course: 'M. SC.( CA & IT)',
+        institution: 'KS School of Business Management, Gujarat University',
+        course: 'M.Sc. in Computer Applications & Information Technology',
         startYear: '2021',
         endYear: '2023'
     },
+    {
+        id: 2,
+        institution: 'KS School of Business Management, Gujarat University',
+        course: 'B.Sc. in Computer Applications & Information Technology',
+        startYear: '2018',
+        endYear: '2021'
+    }
 ]

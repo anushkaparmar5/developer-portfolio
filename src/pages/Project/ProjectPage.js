@@ -1,107 +1,110 @@
-import React, { useContext, useState } from 'react'
-import { Helmet } from 'react-helmet'
-import { Grid } from '@material-ui/core'
-import { Link } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles';
-import { AiOutlineHome } from "react-icons/ai";
+import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
+import { FiArrowLeft, FiSearch } from 'react-icons/fi';
+import Fade from 'react-reveal/Fade';
 
-import './ProjectPage.css'
-import { SingleProject } from '../../components';
-import { ThemeContext } from '../../contexts/ThemeContext';
-import { projectsData } from '../../data/projectsData'
-import { headerData } from '../../data/headerData'
+import './ProjectPage.css';
+import SingleProject from '../../components/Projects/SingleProject/SingleProject';
+import { projectsData } from '../../data/projectsData';
+import { headerData } from '../../data/headerData';
 
 function ProjectPage() {
-
-    const [search, setSearch] = useState('')
-    const { theme } = useContext(ThemeContext);
+    const [search, setSearch] = useState('');
 
     const filteredArticles = projectsData.filter((project) => {
-        const content = project.projectName + project.projectDesc + project.tags
-        return content.toLowerCase().includes(search.toLowerCase())
-    })
-
-    const useStyles = makeStyles((t) => ({
-        search : {
-            color: theme.tertiary, 
-            width: '40%',
-            height: '2.75rem',
-            outline: 'none',
-            border: 'none',
-            borderRadius: '20px',
-            padding: '0.95rem 1rem',
-            fontFamily: "'Noto Sans TC', sans-serif",
-            fontWeight: 500,
-            fontSize: '0.9rem',  
-            backgroundColor: theme.secondary, 
-            boxShadow: theme.type === 'dark' ? 'inset 3px 3px 6px #ffffff10, inset -3px -3px 6px #00000060' : 'inset 3px 3px 6px #ffffffbd, inset -3px -3px 6px #00000030',
-            "&::placeholder": {
-                color: theme.tertiary80, 
-            },
-            [t.breakpoints.down('sm')]: {
-                width:'350px',
-            },
-        },
-        home: {
-            color: theme.secondary,
-            position: 'absolute',
-            top: 25,
-            left: 25,
-            padding: '7px',
-            borderRadius: '50%',
-            boxSizing: 'content-box',
-            fontSize: '2rem',
-            cursor: 'pointer',
-            boxShadow: theme.type === 'dark' ? '3px 3px 6px #ffffff40, -3px -3px 6px #00000050' : '3px 3px 6px #ffffff40, -3px -3px 6px #00000050',
-            transition: 'all 0.3s ease-in-out',
-            "&:hover": 
-            {
-                color: theme.tertiary,
-                transform: 'scale(1.1)',
-            },
-            [t.breakpoints.down('sm')]: {
-                fontSize: '1.8rem',
-            },
-        },
-    }));
-
-    const classes = useStyles();
+        const content = project.projectName + ' ' + project.projectDesc + ' ' + (project.tags ? project.tags.join(' ') : '');
+        return content.toLowerCase().includes(search.toLowerCase());
+    });
 
     return (
-        <div className="projectPage" style={{backgroundColor: theme.secondary}}>
+        <div className='projectPage'>
             <Helmet>
-                <title>{headerData.name} | Projects</title>
+                <title>{headerData.name} | Projects Archive</title>
             </Helmet>
-            <div className="projectPage-header" style={{backgroundColor:theme.primary}}>
-                <Link to="/">
-                        <AiOutlineHome className={classes.home}/>
+
+            {/* Background Grid & Ambient Glows */}
+            <div className='projectPage-bg-grid' />
+            <div className='projectPage-glow projectPage-glow-1' />
+            <div className='projectPage-glow projectPage-glow-2' />
+
+            {/* Header */}
+            <header className='projectPage-header'>
+                <Link to='/' className='projectPage-back-btn' aria-label='Back to Home'>
+                    <FiArrowLeft className='back-btn-icon' />
+                    <span>Back to Home</span>
                 </Link>
-                <h1 style={{color: theme.secondary}}>Projects</h1>
-            </div>
-           <div className="projectPage-container">
-               <div className="projectPage-search">
-                   <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search project..." className={classes.search} />
-               </div>
-               <div className="project-container">
-                   <Grid className="project-grid" container direction="row" alignItems="center" justifyContent="center">
-                        {filteredArticles.map(project => (
-                            <SingleProject
-                                theme={theme}
-                                key={project.id}
-                                id={project.id}
-                                name={project.projectName}
-                                desc={project.projectDesc}
-                                tags={project.tags}
-                                code={project.code}
-                                demo={project.demo}
-                                image={project.image} 
-                            />
-                        ))}
-                   </Grid>
-               </div>
-           </div>    
+
+                <Fade bottom duration={700}>
+                    <div className='projectPage-header-content'>
+                        <span className='projectPage-badge'>Portfolio Archive</span>
+                        <h1 className='projectPage-title'>All Projects</h1>
+                        <p className='projectPage-subtitle'>
+                            A comprehensive showcase of web applications, client solutions, and frontend architectures.
+                        </p>
+                    </div>
+                </Fade>
+            </header>
+
+            {/* Main Container */}
+            <main className='projectPage-container'>
+                {/* Search Bar */}
+                <Fade bottom duration={700} delay={150}>
+                    <div className='projectPage-search-wrapper'>
+                        <FiSearch className='search-input-icon' />
+                        <input
+                            type='text'
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            placeholder='Search by name, technology, or keywords (e.g. React, Redux, API)...'
+                            className='projectPage-search-input'
+                        />
+                        {search && (
+                            <button
+                                className='search-clear-btn'
+                                onClick={() => setSearch('')}
+                                aria-label='Clear search'
+                            >
+                                ✕
+                            </button>
+                        )}
+                    </div>
+                </Fade>
+
+                {/* Projects Grid */}
+                <div className='projectPage-grid-wrapper'>
+                    {filteredArticles.length > 0 ? (
+                        <div className='projectPage-grid'>
+                            {filteredArticles.map((project, idx) => (
+                                <Fade bottom duration={650} delay={(idx % 6) * 100} key={project.id}>
+                                    <SingleProject
+                                        id={project.id}
+                                        name={project.projectName}
+                                        desc={project.projectDesc}
+                                        tags={project.tags}
+                                        code={project.code}
+                                        demo={project.demo}
+                                        image={project.image}
+                                    />
+                                </Fade>
+                            ))}
+                        </div>
+                    ) : (
+                        <Fade bottom duration={600}>
+                            <div className='projectPage-no-results'>
+                                <span className='no-results-emoji'>🔍</span>
+                                <h3>No projects found</h3>
+                                <p>No matching projects found for "<strong>{search}</strong>". Try another search keyword.</p>
+                                <button className='reset-search-btn' onClick={() => setSearch('')}>
+                                    Clear Search Filter
+                                </button>
+                            </div>
+                        </Fade>
+                    )}
+                </div>
+            </main>
         </div>
-    )
+    );
 }
 
-export default ProjectPage
+export default ProjectPage;

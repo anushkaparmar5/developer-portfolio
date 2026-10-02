@@ -1,116 +1,188 @@
-.singleProject {
-    box-shadow: 4px 4px 8px rgba(36, 3, 3, 0.2);
-    width: 550px;
-    /* width: 95%; */
-    margin: auto;
-    height: 460px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1.4rem 1rem;
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
+/* ==============================
+   SINGLE PROJECT CARD
+   ============================== */
+
+.single-project-card {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
 }
 
-.projectContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
+.single-project-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 12px 40px rgba(56, 189, 248, 0.18);
+  background: rgba(15, 23, 42, 0.9);
 }
 
-.projectContent > h2 {
-    font-family: var(--primaryFont);
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.525rem;
-    line-height: 110%;
-    text-align: center;
+/* Image Container & Hover Overlay */
+.project-img-container {
+  position: relative;
+  width: 100%;
+  height: 210px;
+  overflow: hidden;
+  background: #0b0f17;
 }
 
-.projectContent > img {
-    width: 100%;
-    height: 60%;
-    transition: opacity 0.7s 0.3s;
+.project-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
-.singleProject:hover img{
-    opacity: 0;
+.single-project-card:hover .project-card-image {
+  transform: scale(1.06);
 }
 
-.project--showcaseBtn {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+.project-img-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(11, 15, 23, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.project--showcaseBtn > a {
-    cursor: pointer;
-    text-decoration: none;
-    transition: transform 0.5s 0.3s;
+.single-project-card:hover .project-img-overlay {
+  opacity: 1;
 }
 
-.singleProject:hover .project--showcaseBtn a:nth-child(2) {
-    transform: translateX(-140px) scale(1.1) !important;
+.project-overlay-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-
-.singleProject .project--desc{
-    position: absolute;
-    width: 95%;
-    height: 200px;
-    left: 0;
-    top: 0;
-    transform: translate(-110%,40%);
-    padding: 15px;
-    border-radius: 0 20px 20px 0;
-    transition: transform 0.9s;
-    line-height: 110%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--primaryFont);
-}
-  
-.singleProject:hover .project--desc{
-    transform: translate(-2%,40%);
-}
-  
-.singleProject .project--lang{
-    position: absolute;
-    bottom: 20px;
-    right: 0;
-    width: 140px;
-    font-size: 0.8rem;
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    flex-direction: column;
-    border-radius: 10px 0 0 10px;
-    transform: translateX(100%);
-    transition: transform 0.5s 0.3s;
-    padding: 0.825rem;
-}
-  
-.singleProject:hover .project--lang{
-    transform: translateX(0);
+.overlay-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #38bdf8;
+  color: #0b0f17;
+  font-family: var(--primaryFont);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
 }
 
-.project--lang > span {
-    font-family: var(--primaryFont);
-    font-weight: 500;
-    word-break: break-word; 
-    line-height: 100%;
+.overlay-action-btn:hover {
+  background: #ffffff;
+  transform: scale(1.05);
 }
 
-@media screen and (max-width: 600px) {
-    .singleProject{
-        width: 300px;
-    }
+/* Content Area */
+.project-card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.project-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.project-folder-icon {
+  font-size: 1.75rem;
+  color: #38bdf8;
+}
+
+.project-header-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-icon-link {
+  color: #94a3b8;
+  font-size: 1.2rem;
+  transition: color 0.2s ease;
+}
+
+.header-icon-link:hover {
+  color: #38bdf8;
+}
+
+.project-card-title {
+  font-family: var(--primaryFont);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 0.6rem;
+  transition: color 0.2s ease;
+}
+
+.single-project-card:hover .project-card-title {
+  color: #38bdf8;
+}
+
+.project-card-desc {
+  font-family: var(--primaryFont);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #94a3b8;
+  margin-bottom: 1.25rem;
+  flex: 1;
+}
+
+/* Tech Pills */
+.project-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.project-tech-pill {
+  font-family: var(--monoFont);
+  font-size: 0.72rem;
+  font-weight: 500;
+  background: rgba(56, 189, 248, 0.08);
+  color: #7dd3fc;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+}
+
+@media (max-width: 640px) {
+  .project-img-container {
+    height: 180px;
+  }
+
+  /* On mobile touch, make overlay subtly visible or icons easy to tap */
+  .project-img-overlay {
+    opacity: 0.3;
+  }
+
+  .single-project-card:active .project-img-overlay {
+    opacity: 1;
+  }
+
+  .project-card-content {
+    padding: 1.25rem;
+  }
+
+  .project-card-title {
+    font-size: 1.15rem;
+  }
 }

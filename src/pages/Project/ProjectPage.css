@@ -1,85 +1,331 @@
+/* ==============================
+   PROJECTS ARCHIVE PAGE
+   ============================== */
+
 .projectPage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    min-height: 100vh;
+  position: relative;
+  min-height: 100vh;
+  background-color: #070a12;
+  color: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  padding-bottom: 6rem;
 }
 
+/* Background blueprint grid */
+.projectPage-bg-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ambient floating radial glows */
+.projectPage-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.projectPage-glow-1 {
+  top: 10%;
+  left: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+  animation: floatOrb1 14s ease-in-out infinite;
+}
+
+.projectPage-glow-2 {
+  bottom: 10%;
+  right: -5%;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(108, 99, 255, 0.18) 0%, transparent 70%);
+  animation: floatOrb2 16s ease-in-out infinite;
+}
+
+/* Header */
 .projectPage-header {
-    height: 35vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 70px 2rem 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.projectPage-header > h1 {
-    font-size: 4rem;
-    font-family: var(--primaryFont);
+.projectPage-back-btn {
+  position: absolute;
+  top: 25px;
+  left: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: #38bdf8;
+  font-family: var(--primaryFont);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 1.15rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
 }
 
+.projectPage-back-btn:hover {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.5);
+  transform: translateX(-4px);
+  box-shadow: 0 4px 20px rgba(56, 189, 248, 0.25);
+}
+
+.back-btn-icon {
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.projectPage-back-btn:hover .back-btn-icon {
+  transform: translateX(-3px);
+}
+
+.projectPage-header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 700px;
+  margin: 1rem auto 0;
+}
+
+.projectPage-badge {
+  font-family: var(--monoFont);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 0.3rem 0.9rem;
+  border-radius: 9999px;
+  margin-bottom: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.projectPage-title {
+  font-family: var(--primaryFont);
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, #ffffff 0%, #93c5fd 40%, #38bdf8 80%, #a78bfa 100%);
+  background-size: 250% 250%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGradientShimmer 8s ease infinite;
+}
+
+.projectPage-subtitle {
+  font-family: var(--primaryFont);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #94a3b8;
+}
+
+/* Container */
 .projectPage-container {
-    padding: 3rem 2rem;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 3rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
 }
 
-.projectPage-search {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Search Bar */
+.projectPage-search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  margin-bottom: 3.5rem;
+  display: flex;
+  align-items: center;
 }
 
-.project-container {
-    margin-top: 5rem;
-    width: 100%;
+.search-input-icon {
+  position: absolute;
+  left: 18px;
+  font-size: 1.25rem;
+  color: #94a3b8;
+  pointer-events: none;
+  transition: color 0.2s ease;
 }
 
-.project-grid {
-    display: flex;
-    gap: 4rem; 
+.projectPage-search-input {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 14px;
+  padding: 0.95rem 3rem 0.95rem 3.2rem;
+  color: #ffffff;
+  font-family: var(--primaryFont);
+  font-size: 16px; /* 16px avoids auto-zoom on mobile devices */
+  transition: all 0.25s ease;
+  box-sizing: border-box;
 }
 
-@media (min-width: 992px) and (max-width: 1380px) {
-
+.projectPage-search-input:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.3);
+  background: rgba(15, 23, 42, 0.95);
 }
 
-@media screen and (max-width: 992px) {
-    .projectPage-header {
-        height: 25vh;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .project-grid {
-        gap: 3rem;
-    }
+.projectPage-search-wrapper:focus-within .search-input-icon {
+  color: #38bdf8;
 }
 
-@media screen and (max-width: 702px) {
-    .project-grid {
-        gap: 1.5rem;
-    }
+.projectPage-search-input::placeholder {
+  color: #64748b;
 }
 
-@media screen and (max-width: 550px) {
-    .projectPage-header h1 {
-        font-size: 3rem;
-    }
+.search-clear-btn {
+  position: absolute;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #94a3b8;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
 }
-@media screen and (max-width: 400px) {
-    .projectPage-header {
-        height: 20vh;
-    }
-    .projectPage-header h1 {
-        font-size: 2.5rem;
-    }
+
+.search-clear-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+/* Grid Wrapper */
+.projectPage-grid-wrapper {
+  width: 100%;
+}
+
+.projectPage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Empty State */
+.projectPage-no-results {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 4rem 2rem;
+  text-align: center;
+  max-width: 550px;
+  margin: 2rem auto;
+}
+
+.no-results-emoji {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.projectPage-no-results h3 {
+  font-family: var(--primaryFont);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.projectPage-no-results p {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  margin-bottom: 1.5rem;
+}
+
+.reset-search-btn {
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+  font-family: var(--primaryFont);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reset-search-btn:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Tablet Responsiveness */
+@media (max-width: 1024px) {
+  .projectPage-grid {
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .projectPage-header {
+    padding: 85px 1.25rem 30px;
+  }
+
+  .projectPage-back-btn {
+    top: 20px;
+    left: 20px;
+    font-size: 0.82rem;
+    padding: 0.4rem 0.9rem;
+  }
+
+  .projectPage-container {
+    padding: 2rem 1.25rem;
+  }
+
+  .projectPage-search-wrapper {
+    margin-bottom: 2rem;
+  }
+
+  .projectPage-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
 }

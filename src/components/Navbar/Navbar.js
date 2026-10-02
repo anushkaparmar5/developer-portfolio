@@ -1,318 +1,138 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavHashLink as NavLink } from 'react-router-hash-link';
-import Fade from 'react-reveal/Fade';
-import { IoMenuSharp, IoHomeSharp } from 'react-icons/io5';
-import { HiDocumentText } from 'react-icons/hi';
-import { BsFillGearFill } from 'react-icons/bs';
-import { MdPhone } from 'react-icons/md';
-import { FaUser, FaFolderOpen } from 'react-icons/fa';
-import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CloseIcon from '@material-ui/icons/Close';
-
+import { HiMenuAlt3, HiX } from 'react-icons/hi';
+import { FiArrowUpRight } from 'react-icons/fi';
 import './Navbar.css';
 import { headerData } from '../../data/headerData';
-import { ThemeContext } from '../../contexts/ThemeContext';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import URLS from '../../routing/index';
 
 function Navbar() {
-    const { theme, setHandleDrawer } = useContext(ThemeContext);
     const history = useHistory();
-    const [open, setOpen] = useState(false);
+    const location = useLocation();
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
 
-    const handleDrawerOpen = () => {
-        setOpen(true);
-        setHandleDrawer();
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 30) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const toggleMobileMenu = () => {
+        setMobileMenuOpen(!mobileMenuOpen);
     };
 
-    const handleDrawerClose = () => {
-        setOpen(false);
-        setHandleDrawer();
-    };
-
-    const useStyles = makeStyles((t) => ({
-        navMenu: {
-            fontSize: '2.5rem',
-            color: theme.tertiary,
-            cursor: 'pointer',
-            transform: 'translateY(-10px)',
-            transition: 'color 0.3s',
-            position: "fixed",
-            top: "30px",
-            right: "30px",
-            '&:hover': {
-                color: theme.primary,
-            },
-            [t.breakpoints.down('sm')]: {
-                fontSize: '2.5rem',
-            },
-            [t.breakpoints.down('xs')]: {
-                fontSize: '2rem',
-            },
-        },
-        MuiDrawer: {
-            padding: '0em 1.8em',
-            width: '14em',
-            fontFamily: ' var(--primaryFont)',
-            fontStyle: ' normal',
-            fontWeight: ' normal',
-            fontSize: ' 24px',
-            background: theme.secondary,
-            overflow: 'hidden',
-            borderTopRightRadius: '40px',
-            borderBottomRightRadius: '40px',
-            [t.breakpoints.down('sm')]: {
-                width: '12em',
-            },
-        },
-        closebtnIcon: {
-            fontSize: '2rem',
-            fontWeight: 'bold',
-            cursor: 'pointer',
-            color: theme.primary,
-            position: 'absolute',
-            right: 40,
-            top: 40,
-            transition: 'color 0.2s',
-            '&:hover': {
-                color: theme.tertiary,
-            },
-            [t.breakpoints.down('sm')]: {
-                right: 20,
-                top: 20,
-            },
-        },
-        drawerItem: {
-            margin: '2rem auto',
-            borderRadius: '78.8418px',
-            background: theme.secondary,
-            color: theme.primary,
-            width: '85%',
-            height: '60px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-evenly',
-            padding: '0 30px',
-            boxSizing: 'border-box',
-            border: '2px solid',
-            borderColor: theme.primary,
-            transition: 'background-color 0.2s, color 0.2s',
-            '&:hover': {
-                background: theme.primary,
-                color: theme.secondary,
-            },
-            [t.breakpoints.down('sm')]: {
-                width: '100%',
-                padding: '0 25px',
-                height: '55px',
-            },
-        },
-        drawerLinks: {
-            fontFamily: 'var(--primaryFont)',
-            width: '50%',
-            fontSize: '1.3rem',
-            fontWeight: 600,
-            [t.breakpoints.down('sm')]: {
-                fontSize: '1.125rem',
-            },
-        },
-        drawerIcon: {
-            fontSize: '1.6rem',
-            [t.breakpoints.down('sm')]: {
-                fontSize: '1.385rem',
-            },
-        },
-    }));
-
-    const classes = useStyles();
-
-    const shortname = (name) => {
-        if (name.length > 12) {
-            return name.split(' ')[0];
-        } else {
-            return name;
-        }
+    const closeMobileMenu = () => {
+        setMobileMenuOpen(false);
     };
 
     const handleLogoClick = () => {
         history.push(URLS.Home);
     };
 
+    const navLinks = [
+        { name: 'About', path: '/#about', hash: '#about' },
+        { name: 'Tech Stack', path: '/#skills', hash: '#skills' },
+        { name: 'Journey', path: '/#experience', hash: '#experience' },
+        { name: 'Projects', path: '/#projects', hash: '#projects' },
+        { name: 'Certificates', path: '/#certifications', hash: '#certifications' },
+        { name: 'Connect', path: '/#contacts', hash: '#contacts' },
+    ];
+
     return (
-        <div className='navbar'>
-            <div className='navbar--container'>
-                <h1 style={{ color: theme.secondary }} onClick={handleLogoClick}>
-                    {shortname(headerData.name)}
-                </h1>
-
-                <IoMenuSharp
-                    className={classes.navMenu}
-                    onClick={handleDrawerOpen}
-                    aria-label='Menu'
-                    id='navicon'
-                />
-            </div>
-            <Drawer
-                variant='temporary'
-                onClose={(event, reason) => {
-                    if (reason !== 'backdropClick') {
-                        handleDrawerClose();
-                    } else if (reason !== 'escapeKeyDown') {
-                        handleDrawerClose();
-                    }
-                }}
-                anchor='left'
-                open={open}
-                classes={{ paper: classes.MuiDrawer }}
-                className='drawer'
-                disableScrollLock={true}
-            >
-                <div className='div-closebtn'>
-                    <CloseIcon
-                        onClick={handleDrawerClose}
-                        onKeyDown={(e) => {
-                            if (e.key === ' ' || e.key === 'Enter') {
-                                e.preventDefault();
-                                handleDrawerClose();
-                            }
-                        }}
-                        className={classes.closebtnIcon}
-                        role='button'
-                        tabIndex='0'
-                        aria-label='Close'
-                    />
+        <header className={`navbar-header ${scrolled ? 'navbar-scrolled' : ''}`}>
+            <div className='navbar-wrapper'>
+                {/* Brand Monogram */}
+                <div className='navbar-brand' onClick={handleLogoClick}>
+                    <span className='brand-logo-text'>BP</span>
+                    <span className='brand-dot'>.</span>
                 </div>
-                <br />
 
-                <div onClick={handleDrawerClose}>
-                    <div className='navLink--container'>
-                        <Fade left>
+                {/* Center Horizontal Nav */}
+                <nav className='navbar-nav-center'>
+                    {navLinks.map((item, idx) => {
+                        const isActive = location.hash === item.hash;
+                        return (
                             <NavLink
-                                to={URLS.Home}
+                                key={idx}
+                                to={item.path}
                                 smooth={true}
-                                spy='true'
-                                duration={2000}
+                                duration={800}
+                                className={`nav-item-link ${isActive ? 'active' : ''}`}
                             >
-                                <div className={classes.drawerItem}>
-                                    <IoHomeSharp
-                                        className={classes.drawerIcon}
-                                    />
-                                    <span className={classes.drawerLinks}>
-                                        Home
-                                    </span>
-                                </div>
+                                <span className='nav-link-text'>{item.name}</span>
+                                {isActive && <span className='nav-active-pill' />}
                             </NavLink>
-                        </Fade>
+                        );
+                    })}
+                </nav>
 
-                        <Fade left>
-                            <NavLink
-                                to={URLS.About}
-                                smooth={true}
-                                spy='true'
-                                duration={2000}
-                            >
-                                <div className={classes.drawerItem}>
-                                    <FaUser className={classes.drawerIcon} />
-                                    <span className={classes.drawerLinks}>
-                                        About
-                                    </span>
-                                </div>
-                            </NavLink>
-                        </Fade>
+                {/* Right Action */}
+                <div className='navbar-right-actions'>
+                    <a
+                        href={headerData.resumePdf || '#'}
+                        target='_blank'
+                        rel='noreferrer'
+                        className='nav-action-btn'
+                    >
+                        <span>Resume</span>
+                        <FiArrowUpRight className='nav-action-icon' />
+                    </a>
 
-                        <Fade left>
-                            <NavLink
-                                to={URLS.Education}
-                                smooth={true}
-                                spy='true'
-                                duration={2000}
-                            >
-                                <div className={classes.drawerItem}>
-                                    <HiDocumentText
-                                        className={classes.drawerIcon}
-                                    />
-                                    <span className={classes.drawerLinks}>
-                                        Education
-                                    </span>
-                                </div>
-                            </NavLink>
-                        </Fade>
+                    <div className='nav-status-badge' title='Available for work'>
+                        <span className='status-pulse-dot' />
+                        <span className='status-badge-text'>Available</span>
+                    </div>
 
-                        <Fade left>
-                            <NavLink
-                                to={URLS.Skills}
-                                smooth={true}
-                                spy='true'
-                                duration={2000}
-                            >
-                                <div className={classes.drawerItem}>
-                                    <BsFillGearFill
-                                        className={classes.drawerIcon}
-                                    />
-                                    <span className={classes.drawerLinks}>
-                                        Skills
-                                    </span>
-                                </div>
-                            </NavLink>
-                        </Fade>
+                    {/* Mobile Hamburger Toggle */}
+                    <button
+                        className='mobile-menu-btn'
+                        onClick={toggleMobileMenu}
+                        aria-label='Toggle menu'
+                    >
+                        {mobileMenuOpen ? <HiX /> : <HiMenuAlt3 />}
+                    </button>
+                </div>
+            </div>
 
-                        <Fade left>
-                            <NavLink
-                                to={URLS.Services}
-                                smooth={true}
-                                spy='true'
-                                duration={2000}
-                            >
-                                <div className={classes.drawerItem}>
-                                    <BsFillGearFill
-                                        className={classes.drawerIcon}
-                                    />
-                                    <span className={classes.drawerLinks}>
-                                        Services
-                                    </span>
-                                </div>
-                            </NavLink>
-                        </Fade>
-
-                        <Fade left>
-                            <NavLink
-                                to={URLS.Projects}
-                                smooth={true}
-                                spy='true'
-                                duration={2000}
-                            >
-                                <div className={classes.drawerItem}>
-                                    <FaFolderOpen
-                                        className={classes.drawerIcon}
-                                    />
-                                    <span className={classes.drawerLinks}>
-                                        Projects
-                                    </span>
-                                </div>
-                            </NavLink>
-                        </Fade>
-
-                        <Fade left>
-                            <NavLink
-                                to={URLS.Contacts}
-                                smooth={true}
-                                spy='true'
-                                duration={2000}
-                            >
-                                <div className={classes.drawerItem}>
-                                    <MdPhone className={classes.drawerIcon} />
-                                    <span className={classes.drawerLinks}>
-                                        Contact
-                                    </span>
-                                </div>
-                            </NavLink>
-                        </Fade>
-
+            {/* Mobile Dropdown Menu */}
+            <div className={`mobile-nav-drawer ${mobileMenuOpen ? 'open' : ''}`}>
+                <div className='mobile-nav-links'>
+                    {navLinks.map((item, idx) => (
+                        <NavLink
+                            key={idx}
+                            to={item.path}
+                            smooth={true}
+                            duration={800}
+                            onClick={closeMobileMenu}
+                            className='mobile-nav-link'
+                        >
+                            <span className='mobile-nav-num'>0{idx + 1}.</span>
+                            <span className='mobile-nav-text'>{item.name}</span>
+                        </NavLink>
+                    ))}
+                    <div className='mobile-nav-footer'>
+                        <a
+                            href={headerData.resumePdf || '#'}
+                            target='_blank'
+                            rel='noreferrer'
+                            className='mobile-resume-btn'
+                            onClick={closeMobileMenu}
+                        >
+                            <span>Download Resume</span>
+                            <FiArrowUpRight />
+                        </a>
                     </div>
                 </div>
-            </Drawer>
-        </div>
+            </div>
+        </header>
     );
 }
 
